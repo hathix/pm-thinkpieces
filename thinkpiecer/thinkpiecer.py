@@ -10,6 +10,7 @@ from datetime import datetime
 import os, os.path
 
 # Local modules
+import utilities
 from utilities import safe_get
 import feeds
 
@@ -110,11 +111,41 @@ def add_articles_to_index(feed_list, ix):
     print("DONE!")
     writer.commit()
 
+# Given an index and a search term,
+# prints details on all matched articles.
+def search(search_term, ix):
+    with ix.searcher() as searcher:
+        parser = QueryParser("content", ix.schema)
+        # Allow fuzzy matching (EDIT: kinda screws things up)
+        # parser.add_plugin(FuzzyTermPlugin())
+        # Allow searching for entire phrases w/ single quotes, like 'microsoft teams'
+        parser.add_plugin(qparser.SingleQuotePlugin())
+
+        query = parser.parse(search_term)
+        results = searcher.search(query, limit=None)
+
+        # Highlighting settings
+        # This provides more context characters around the searched-for text
+        results.fragmenter.surround = 50
+        results.fragmenter.maxchars = 500
+
+        # Surround matched tags with brackets
+        results.formatter = utilities.BracketFormatter()
+
+        for hit in results:
+            print(hit['title'])
+            print(hit['publication'])
+            print(hit['author'])
+            print(hit['url'])
+            print(hit.highlights("content", top=3))
+            print("\n")
+
 
 def main():
     ix = load_index()
     feed_list = feeds.get_feeds()
-    add_articles_to_index(feed_list, ix)
+    # add_articles_to_index(feed_list, ix)
+    search("TikTok", ix)
 
 
 if __name__ == '__main__': main()
