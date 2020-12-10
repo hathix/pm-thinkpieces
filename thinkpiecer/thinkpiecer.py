@@ -144,7 +144,10 @@ def search(search_term, ix):
 def main():
     ix = load_index()
     feed_list = feeds.get_feeds()
+    # Only do this the 1st time
     # add_articles_to_index(feed_list, ix)
+
+    # Demo 
     search("TikTok", ix)
 
 
