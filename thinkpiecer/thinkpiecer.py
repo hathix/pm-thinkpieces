@@ -99,7 +99,12 @@ def add_articles_to_index(feed_list, ix):
                 summary_tree = BeautifulSoup(safe_get(entry, 'summary'), features="html.parser")
                 body_text = summary_tree.get_text(" ", strip=True)
 
-            writer.add_document(
+            # This ensures that we don't have duplicate entries with the same unique key (here, URL).
+            # If the key already exists, this wipes it out
+            # and replaces it with a fresh entry.
+            # If the key doesn't exist, it creates
+            # from scratch.
+            writer.update_document(
                 title=safe_get(entry, 'title'),
                 author=safe_get(entry, 'author'),
                 publication=publication,
@@ -142,12 +147,20 @@ def search(search_term, ix):
 
 
 def main():
-    ix = load_index()
+    # ix = load_index()
+    ix = build_new_index()
     feed_list = feeds.get_feeds()
     # Only do this the 1st time
-    # add_articles_to_index(feed_list, ix)
+    # TODO: this just adds more entries to the list.
+    # Do incremental indexing: only add entries
+    # that don't show up already
+    # https://whoosh.readthedocs.io/en/latest/indexing.html#incremental-indexing
+    # This way it's idempotent
+    # Just check if the URLs (unique keys)
+    # are included in the index. if not,
+    add_articles_to_index(feed_list, ix)
 
-    # Demo 
+    # Demo
     search("TikTok", ix)
 
 
