@@ -29,7 +29,7 @@ def build_new_index():
         author=TEXT(stored=True),
         publication=TEXT(stored=True),
         summary=TEXT(stored=True),
-        url=TEXT(stored=True),
+        url=ID(stored=True, unique=True),
         published=DATETIME(stored=True),
         content=TEXT(stored=True))
 
@@ -104,6 +104,7 @@ def add_articles_to_index(feed_list, ix):
             # and replaces it with a fresh entry.
             # If the key doesn't exist, it creates
             # from scratch.
+            # TODO: i don't think it works, check
             writer.update_document(
                 title=safe_get(entry, 'title'),
                 author=safe_get(entry, 'author'),
@@ -147,21 +148,23 @@ def search(search_term, ix):
 
 
 def main():
-    # ix = load_index()
+    # Call build() the first time, then load()
+    # every time thereafter
     ix = build_new_index()
+    # ix = load_index()
+
     feed_list = feeds.get_feeds()
-    # Only do this the 1st time
-    # TODO: this just adds more entries to the list.
-    # Do incremental indexing: only add entries
-    # that don't show up already
-    # https://whoosh.readthedocs.io/en/latest/indexing.html#incremental-indexing
-    # This way it's idempotent
-    # Just check if the URLs (unique keys)
-    # are included in the index. if not,
+
+    # This adds any new articles we find
+    # to the index, while leaving existing
+    # ones untouched. (Now it doesn't duplicate!)
+    add_articles_to_index(feed_list, ix)
+
+    # Stress-test: run this many times and see if it's idempotent
     add_articles_to_index(feed_list, ix)
 
     # Demo
-    search("TikTok", ix)
+    search("Airtable", ix)
 
 
 if __name__ == '__main__': main()
