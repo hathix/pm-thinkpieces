@@ -9,7 +9,7 @@ import calendar
 from datetime import datetime
 import os, os.path
 
-from . import utilities
+import utilities
 
 # Constants
 WHOOSH_INDEX_DIR = "../whoosh_index3"
@@ -52,5 +52,7 @@ def load_index():
     ix = index.open_dir(WHOOSH_INDEX_DIR)
 
 
-def __main__():
+def main():
     print("Hi")
+
+if __name__ == '__main__': main()
