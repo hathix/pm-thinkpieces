@@ -25,21 +25,27 @@
   <meta name="theme-color" content="#fafafa">
 </head>
 <body>
-    <h1>Search Results</h1>
+    <div class="container">
+      <h1>Search Results</h1>
+      <ul class="list-group">
+        {% for hit in results %}
+            <li class="list-group-item">
+              <h4>
+                <a href="{{ hit.url }}">
+                  {{ hit.title | safe }}
+                </a>
+              </h4>
+              <p class="lead">{{ hit.author }} in {{ hit.publication }}</p>
 
-    <ul>
-      {% for hit in results %}
-          <li>
-            <a href="{{ hit.url }}">
-              <strong>{{ hit.title | safe }}</strong>
-            </a>
-            by {{ hit.author }}
-            in {{ hit.publication }}.
-            Score: {{ hit.score }}.
-            Highlights: {{ hit.highlights | safe }}.
-          </li>
-      {% endfor %}
-    </ul>
+              <p>
+                <em>{{ hit.highlights | safe }}</em>
+              </p>
+
+              <!-- Score: {{ hit.score }}. -->
+            </li>
+        {% endfor %}
+      </ul>
+    </div>
 
     {# a comment #}
 
