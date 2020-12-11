@@ -118,7 +118,7 @@ def add_articles_to_index(feed_list, ix):
     writer.commit()
 
 # Given an index and a search term,
-# prints details on all matched articles.
+# returns details on all matched articles.
 def search(search_term, ix):
     with ix.searcher() as searcher:
         parser = QueryParser("content", ix.schema)
@@ -136,15 +136,30 @@ def search(search_term, ix):
         results.fragmenter.maxchars = 500
 
         # Surround matched tags with brackets
-        results.formatter = utilities.BracketFormatter()
+        # results.formatter = utilities.BracketFormatter()
 
-        for hit in results:
-            print(hit['title'])
-            print(hit['publication'])
-            print(hit['author'])
-            print(hit['url'])
-            print(hit.highlights("content", top=3))
-            print("\n")
+        # This just prints it nicely for the terminal output
+        # for hit in results:
+        #     print(hit['title'])
+        #     print(hit['publication'])
+        #     print(hit['author'])
+        #     print(hit['url'])
+        #     print(hit.highlights("content", top=3))
+        #     print("\n")
+
+        # Now we actually compute a dict of results and return it
+        # Convert each Hit into a dict
+        def extract_hit_info(hit):
+            return {
+                'title': safe_get(hit, 'title'),
+                'publication': safe_get(hit, 'publication'),
+                'author': safe_get(hit, 'author'),
+                'url': safe_get(hit, 'url'),
+                'highlights': hit.highlights("content", top=3)
+            }
+
+        hit_list = [extract_hit_info(h) for h in results]
+        return hit_list
 
 
 def main():
@@ -164,7 +179,7 @@ def main():
     # add_articles_to_index(feed_list, ix)
 
     # Demo
-    search("Airtable", ix)
+    print(search("Airtable", ix))
 
 
 if __name__ == '__main__': main()

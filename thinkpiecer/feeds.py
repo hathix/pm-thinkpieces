@@ -14,7 +14,8 @@ def get_feeds():
         "breakingsmart",
         "artofgig",
         "theskip",
-        "gwern"
+        "gwern",
+        "productinsights"
     ]
 
     # Feeds are, e.g., https://thegeneralist.substack.com/feed
