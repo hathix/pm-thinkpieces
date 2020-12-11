@@ -175,6 +175,19 @@ def search(search_term, ix):
         return hit_list
 
 
+# Rebuilds the entire index from scratch, including adding
+# all the documents.
+def build_from_scratch():
+    # Make an index
+    ix = build_new_index()
+
+    # Get and add feeds
+    feed_list = feeds.get_feeds()
+    add_articles_to_index(feed_list, ix)
+
+    print("Done!")
+
+
 def main():
     # Call build() the first time, then load()
     # every time thereafter
