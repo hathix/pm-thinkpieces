@@ -15,9 +15,13 @@ import utilities
 from utilities import safe_get
 import feeds
 
-# Constants
-WHOOSH_INDEX_DIR = "./whoosh_index3"
+## Constants
 
+# For dev work
+# WHOOSH_INDEX_DIR = "./whoosh_index3"
+
+# For deployment to prod
+WHOOSH_INDEX_DIR = "./whoosh_prod"
 
 
 # Creates a brand-new index and returns it.
@@ -185,7 +189,21 @@ def build_from_scratch():
     feed_list = feeds.get_feeds()
     add_articles_to_index(feed_list, ix)
 
-    print("Done!")
+    print("Built!")
+
+
+# Loads the existing index and adds articles to it.
+# This is idempotent -- doesn't affect any existing articles.
+def update_index():
+    # Load the existing index (if none exists, make a new one, in which case
+    # this function behaves the same as build_from_scratch())
+    ix = load_index()
+
+    # Get and add feeds
+    feed_list = feeds.get_feeds()
+    add_articles_to_index(feed_list, ix)
+
+    print("Updated!")
 
 
 def main():

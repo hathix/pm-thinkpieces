@@ -31,24 +31,26 @@ def testr():
     return 'Sup!'
 
 
-@app.route('/build')
-def build():
-    ## Build the search index and fill it with articles
-
-    # TODO: takes really long so Heroku might time out (we get like 30s)
-
-    # Wipe the index and create a clean one
-    ix = thinkpiecer.build_new_index()
-
-    # Get feeds to read and insert
-    feed_list = feeds.get_feeds()
-
-    # This adds any new articles we find
-    # to the index, while leaving existing
-    # ones untouched. (Now it doesn't duplicate!)
-    thinkpiecer.add_articles_to_index(feed_list, ix)
-
-    return 'Built Index!!'
+# Hide this from the public!
+# Building and updating the index is now done with our own scripts
+# @app.route('/build')
+# def build():
+#     ## Build the search index and fill it with articles
+#
+#     # TODO: takes really long so Heroku might time out (we get like 30s)
+#
+#     # Wipe the index and create a clean one
+#     ix = thinkpiecer.build_new_index()
+#
+#     # Get feeds to read and insert
+#     feed_list = feeds.get_feeds()
+#
+#     # This adds any new articles we find
+#     # to the index, while leaving existing
+#     # ones untouched. (Now it doesn't duplicate!)
+#     thinkpiecer.add_articles_to_index(feed_list, ix)
+#
+#     return 'Built Index!!'
 
 
 # @app.route('/search/<query>')
