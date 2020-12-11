@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import render_template
 from flask.json import jsonify
 
 import thinkpiecer
@@ -42,4 +43,6 @@ def search(query):
 
     hits = thinkpiecer.search(query, ix)
 
-    return jsonify(hits)
+    # Render template
+    return render_template('search.html', results=hits)
+    # return jsonify(hits)
