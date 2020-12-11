@@ -27,7 +27,7 @@ def hello_world():
 
 
 @app.route('/test')
-def hello_world():
+def testr():
     return 'Sup!'
 
 
