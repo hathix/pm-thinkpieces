@@ -150,8 +150,8 @@ def search(search_term, ix):
 def main():
     # Call build() the first time, then load()
     # every time thereafter
-    ix = build_new_index()
-    # ix = load_index()
+    # ix = build_new_index()
+    ix = load_index()
 
     feed_list = feeds.get_feeds()
 
@@ -161,7 +161,7 @@ def main():
     add_articles_to_index(feed_list, ix)
 
     # Stress-test: run this many times and see if it's idempotent
-    add_articles_to_index(feed_list, ix)
+    # add_articles_to_index(feed_list, ix)
 
     # Demo
     search("Airtable", ix)
