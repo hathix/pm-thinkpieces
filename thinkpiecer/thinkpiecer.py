@@ -150,11 +150,13 @@ def search(search_term, ix):
         # Now we actually compute a dict of results and return it
         # Convert each Hit into a dict
         def extract_hit_info(hit):
+            # dict.get() is safer than the [bracket] notation since it doesn't
+            # error out if the key doesn't exist; it just returns None
             return {
-                'title': safe_get(hit, 'title'),
-                'publication': safe_get(hit, 'publication'),
-                'author': safe_get(hit, 'author'),
-                'url': safe_get(hit, 'url'),
+                'title': hit.get('title'),
+                'publication': hit.get('publication'),
+                'author': hit.get('author'),
+                'url': hit.get('url'),
                 'highlights': hit.highlights("content", top=3)
             }
 
