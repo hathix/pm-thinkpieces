@@ -1,0 +1,13 @@
+{% include 'header.html' %}
+
+  <h1>Welcome to Thinkpiecer for PMs</h1>
+
+  <p class="lead">
+    Research companies, topics, or trends from the ~30 best product management
+    writers we've found. Start below:
+  </p>
+
+  {% from 'macros.html' import searchbox %}
+  {{ searchbox() }}
+
+{% include 'footer.html' %}
