@@ -3,14 +3,21 @@ Search for thinkpieces across many PM publications
 
 ## Running
 
-Make sure you set up
+I'm using `pipenv` to manage virtual environments. Run
 
 ```
-virtualenv venv
+pipenv --python 3.9
 ```
 
 Then
 
 ```
-venv bin/activate
+pipenv shell
 ```
+
+To get going. No need for manual virtualenv stuff anymore.
+
+## Versions
+
+Use Python 3.9, or at least update the `runtime.txt` to match your local version.
+That ensures that the Python running on Heroku is the same that you're using.
