@@ -27,7 +27,6 @@ def build_new_index():
 
     # First, get an addon that lets users run optional case-sensitive searches.
     case_sensitive_analyzer = utilities.get_case_sensitive_analyzer()
-    print(case_sensitive_analyzer)
 
     schema = Schema(
         title=TEXT(stored=True),

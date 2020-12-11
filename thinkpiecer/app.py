@@ -18,8 +18,8 @@ def build():
 
     # TODO: takes really long so Heroku might time out (we get like 30s)
 
-    # Load the index (or make a blank one if it's not there)
-    ix = thinkpiecer.load_index()
+    # Wipe the index and create a clean one
+    ix = thinkpiecer.build_new_index()
 
     # Get feeds to read and insert
     feed_list = feeds.get_feeds()
