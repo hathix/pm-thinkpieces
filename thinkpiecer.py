@@ -16,7 +16,7 @@ from utilities import safe_get
 import feeds
 
 # Constants
-WHOOSH_INDEX_DIR = "../whoosh_index3"
+WHOOSH_INDEX_DIR = "./whoosh_index3"
 
 
 
