@@ -26,6 +26,11 @@ def hello_world():
     return 'Hello, World!'
 
 
+@app.route('/test')
+def hello_world():
+    return 'Sup!'
+
+
 @app.route('/build')
 def build():
     ## Build the search index and fill it with articles
