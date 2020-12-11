@@ -2,7 +2,6 @@ appnope==0.1.2
 argon2-cffi==20.1.0
 async-generator==1.10
 attrs==20.3.0
-Babel==2.9.0
 backcall==0.2.0
 beautifulsoup4==4.9.3
 bleach==3.2.1
@@ -16,7 +15,6 @@ feedparser==6.0.2
 Flask==1.1.2
 gunicorn==20.0.4
 ipykernel==5.4.0
-ipython==7.19.0
 ipython-genutils==0.2.0
 itsdangerous==1.1.0
 jedi==0.17.2
