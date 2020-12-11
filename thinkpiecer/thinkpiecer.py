@@ -24,6 +24,11 @@ WHOOSH_INDEX_DIR = "../whoosh_index3"
 def build_new_index():
     # Start by making a new schema.
     # This is stored with the index.
+
+    # First, get an addon that lets users run optional case-sensitive searches.
+    case_sensitive_analyzer = utilities.get_case_sensitive_analyzer()
+    print(case_sensitive_analyzer)
+
     schema = Schema(
         title=TEXT(stored=True),
         author=TEXT(stored=True),
@@ -31,7 +36,7 @@ def build_new_index():
         summary=TEXT(stored=True),
         url=ID(stored=True, unique=True),
         published=DATETIME(stored=True),
-        content=TEXT(stored=True))
+        content=TEXT(stored=True, analyzer=case_sensitive_analyzer))
 
     # Create a home for the index if it doesn't exist already
     if not os.path.exists(WHOOSH_INDEX_DIR):
@@ -157,7 +162,8 @@ def search(search_term, ix):
                 'publication': hit.get('publication'),
                 'author': hit.get('author'),
                 'url': hit.get('url'),
-                'highlights': hit.highlights("content", top=3)
+                'highlights': hit.highlights("content", top=3),
+                'score': hit.score
             }
 
         hit_list = [extract_hit_info(h) for h in results]
