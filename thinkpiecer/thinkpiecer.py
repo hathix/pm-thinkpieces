@@ -2,6 +2,7 @@ import feedparser
 from bs4 import BeautifulSoup
 from whoosh import index
 from whoosh.fields import *
+from whoosh.writing import AsyncWriter
 from whoosh.qparser import QueryParser
 import whoosh.qparser as qparser
 from whoosh import highlight
@@ -67,7 +68,11 @@ def load_index():
 # so we can search them.
 def add_articles_to_index(feed_list, ix):
     # Create a writer to start adding entries
-    writer = ix.writer()
+    # Let's use AsyncWriter, which is a thread-safe, straight upgrade
+    # to the normal one
+    # https://whoosh.readthedocs.io/en/latest/api/writing.html#whoosh.writing.AsyncWriter
+    # writer = ix.writer()
+    writer = AsyncWriter(ix)
 
     for feed_url in feed_list:
         print(feed_url)
