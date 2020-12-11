@@ -161,6 +161,7 @@ def search(search_term, ix):
                 'publication': hit.get('publication'),
                 'author': hit.get('author'),
                 'url': hit.get('url'),
+                'published': hit.get('published'),
                 'highlights': hit.highlights("content", top=3),
                 'score': hit.score
             }

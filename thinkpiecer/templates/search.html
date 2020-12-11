@@ -45,7 +45,9 @@
                   {{ hit.title | safe }}
                 </a>
               </h4>
-              <p class="lead">{{ hit.author }} in {{ hit.publication }}</p>
+              <p class="lead">
+                {{ hit.author }} in {{ hit.publication }} on {{ hit.published | datetime }}
+              </p>
 
               <p>
                 <em>{{ hit.highlights | safe }}</em>
@@ -53,6 +55,10 @@
 
               <!-- Score: {{ hit.score }}. -->
             </li>
+        {% else %}
+          <li class="list-group-item list-group-item-danger">
+            No results found :(
+          </li>
         {% endfor %}
       </ul>
     </div>

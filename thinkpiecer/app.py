@@ -64,3 +64,11 @@ def search():
     # Render template
     return render_template('search.html', results=hits, query=query)
     # return jsonify(hits)
+
+
+## Custom Jinja filters
+
+# Nice way to format a datetime
+@app.template_filter('datetime')
+def format_datetime(value):
+    return value.strftime("%b %d, %Y")
