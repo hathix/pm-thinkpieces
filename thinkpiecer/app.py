@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+from flask import request
 from flask.json import jsonify
 
 import thinkpiecer
@@ -33,9 +34,26 @@ def build():
     return 'Built Index!!'
 
 
-@app.route('/search/<query>')
-def search(query):
+# @app.route('/search/<query>')
+# def search(query):
+#     # Run a search for the given term and print results
+#
+#     # Load the index (or make a blank one if it's not there)
+#     # If the index is already there, this will be a LOT faster.
+#     ix = thinkpiecer.load_index()
+#
+#     hits = thinkpiecer.search(query, ix)
+#
+#     # Render template
+#     return render_template('search.html', results=hits)
+#     # return jsonify(hits)
+
+@app.route('/search', methods=['GET'])
+def search():
     # Run a search for the given term and print results
+
+    # Get query from GET params
+    query = request.args.get('query', '');
 
     # Load the index (or make a blank one if it's not there)
     # If the index is already there, this will be a LOT faster.
@@ -44,5 +62,5 @@ def search(query):
     hits = thinkpiecer.search(query, ix)
 
     # Render template
-    return render_template('search.html', results=hits)
+    return render_template('search.html', results=hits, query=query)
     # return jsonify(hits)

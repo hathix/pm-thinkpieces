@@ -27,6 +27,7 @@ def get_feeds():
         "https://stratechery.com/feed/",
         "https://www.profgalloway.com/feed",
         "https://eugene-wei.squarespace.com/blog?format=rss",
+        "https://kwokchain.com/feed",
         "https://medium.com/feed/@superwuster",
         "https://commoncog.com/blog/rss",
         "https://www.lennyrachitsky.com/feed",

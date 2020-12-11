@@ -27,6 +27,16 @@
 <body>
     <div class="container">
       <h1>Search Results</h1>
+
+      <form action="search" method="GET">
+        <div class="input-group mb-3">
+          <input type="text" name="query" class="form-control"
+            placeholder="Query (can capitalize)"
+            value="{{ query }}">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+
       <ul class="list-group">
         {% for hit in results %}
             <li class="list-group-item">
