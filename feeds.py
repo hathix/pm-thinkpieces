@@ -12,10 +12,10 @@ def get_feeds():
         "sariazout",
         "digitalnative",
         "jamesonstartups",
+        "napkinmath",
         "breakingsmart",
         "artofgig",
         "theskip",
-        "gwern",
         "productinsights",
 
         # HealthTech ones
