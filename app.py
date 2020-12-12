@@ -81,7 +81,8 @@ def search():
     hits = thinkpiecer.search(query, ix)
 
     # Render template
-    return render_template('search.html', results=hits, query=query)
+    return render_template('search.html',
+    results=hits, query=query, title_addon=query)
     # return jsonify(hits)
 
 

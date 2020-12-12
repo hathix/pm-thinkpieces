@@ -2,14 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Thinkpiecer</title>
+  <title>
+    {% if title_addon %}
+      {{ title_addon }} |
+    {% endif %}
+    Thinkpiecer
+  </title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta property="og:title" content="Thinkpiecer">
+  <meta property="og:title" content="{% if title_addon %}{{ title_addon }} | {% endif %}Thinkpiecer">
+  <meta property="og:description" content="Search thinkpieces from the ~30 best product management writers.">
   <meta property="og:type" content="">
   <meta property="og:url" content="https://thinkpiecer.herokuapp.com">
-  <meta property="og:image" content="{{ url_for('static', filename='icon.png') }}">
+  <!-- <meta property="og:image" content="{{ url_for('static', filename='icon.png') }}"> -->
 
   <!-- <link rel="manifest" href="site.webmanifest"> -->
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon.png') }}">
