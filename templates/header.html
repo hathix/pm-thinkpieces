@@ -9,11 +9,11 @@
   <meta property="og:title" content="Thinkpiecer">
   <meta property="og:type" content="">
   <meta property="og:url" content="https://thinkpiecer.herokuapp.com">
-  <meta property="og:image" content="icon.png">
+  <meta property="og:image" content="{{ url_for('static', filename='icon.png') }}">
 
   <!-- <link rel="manifest" href="site.webmanifest"> -->
-  <link rel="apple-touch-icon" href="icon.png">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon.png') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
   <!-- Place favicon.ico in the root directory -->
 
   <!-- <link rel="stylesheet" href="css/normalize.css">
