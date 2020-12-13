@@ -44,7 +44,8 @@ def get_feeds():
         "https://medium.com/feed/behavioral-economics-1",
         # "https://daringfireball.net/feeds/main",
         "https://wongmjane.com/api/feed/rss",
-        "https://fourweekmba.com/feed",
+        # "https://fourweekmba.com/feed",
+        "http://blog.eladgil.com/feeds/posts/default",
 
         # HealthTech ones
         "https://outofpocket.health/feed"
