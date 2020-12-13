@@ -15,7 +15,7 @@ def get_feeds():
         "napkinmath",
         "breakingsmart",
         "artofgig",
-        "theskip",
+        # "theskip",
         "productinsights",
         "adventurecapital",
 
