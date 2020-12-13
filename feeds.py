@@ -33,6 +33,7 @@ def get_feeds():
     custom_feeds = [
         # Generic ones
         "https://stratechery.com/feed/",
+        "http://ben-evans.com/benedictevans?format=rss",
         "https://www.profgalloway.com/feed",
         "https://eugene-wei.squarespace.com/blog?format=rss",
         "https://kwokchain.com/feed",
