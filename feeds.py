@@ -17,6 +17,7 @@ def get_feeds():
         "artofgig",
         "theskip",
         "productinsights",
+        "adventurecapital",
 
         # HealthTech ones
         "insilico",
@@ -40,7 +41,7 @@ def get_feeds():
         "https://www.lennyrachitsky.com/feed",
         "https://medium.com/feed/bloated-mvp",
         "https://medium.com/feed/behavioral-economics-1",
-        "https://daringfireball.net/feeds/main",
+        # "https://daringfireball.net/feeds/main",
         "https://wongmjane.com/api/feed/rss",
         "https://fourweekmba.com/feed",
 
