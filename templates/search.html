@@ -14,7 +14,10 @@
             </a>
           </h4>
           <p class="lead">
-            {{ hit.author | safe }} in {{ hit.publication | safe }} on {{ hit.published | datetime }}
+            {% if hit.author %}
+              {{ hit.author | safe }} in
+            {% endif %}
+            {{ hit.publication | safe }} on {{ hit.published | datetime }}
           </p>
 
           <p>

@@ -59,6 +59,7 @@ def get_feeds():
         # "https://fourweekmba.com/feed",
         "http://blog.eladgil.com/feeds/posts/default",
         "https://andrewchen.co/feed",
+        # "https://cdixon.org/rss.xml", # Nah his stuff is really old
 
         # HealthTech
         "https://outofpocket.health/feed"
