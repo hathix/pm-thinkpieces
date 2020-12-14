@@ -18,6 +18,7 @@ def get_feeds():
         # "theskip",
         "productinsights",
         "adventurecapital",
+        "diane", # this is called "Snapshots" and has snapshots of the industry
 
         # HealthTech
         "insilico",
@@ -52,6 +53,7 @@ def get_feeds():
         "https://wongmjane.com/api/feed/rss",
         # "https://fourweekmba.com/feed",
         "http://blog.eladgil.com/feeds/posts/default",
+        "https://andrewchen.co/feed",
 
         # HealthTech
         "https://outofpocket.health/feed"
