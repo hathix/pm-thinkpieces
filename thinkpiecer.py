@@ -144,7 +144,7 @@ def search(search_term, ix):
         parser.add_plugin(qparser.SingleQuotePlugin())
 
         query = parser.parse(search_term)
-        results = searcher.search(query, limit=25)
+        results = searcher.search(query, limit=20)
 
         # Highlighting settings
         # This provides more context characters around the searched-for text
