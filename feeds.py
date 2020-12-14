@@ -26,9 +26,12 @@ def get_feeds():
 
         # EdTech
         "meganoconnor",
+
+        # Emerging Markets
+        "emerging",
     ]
 
-    # Feeds are, e.g., https://thegeneralist.substack.com/feed
+    # Feeds for Substacks are, e.g., https://thegeneralist.substack.com/feed
     substack_feeds = ["https://{0}.substack.com/feed".format(domain) for domain in substack_domains]
 
     # Now add some custom RSS feeds
