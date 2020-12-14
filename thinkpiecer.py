@@ -135,8 +135,11 @@ def add_articles_to_index(feed_list, ix):
 def search(search_term, ix):
     with ix.searcher() as searcher:
         parser = QueryParser("content", ix.schema)
-        # Allow fuzzy matching (EDIT: kinda screws things up)
-        # parser.add_plugin(FuzzyTermPlugin())
+
+        # Allow fuzzy matching to catch misspellings
+        # Really slows things down, and requires a "~" in the query which nobody will do
+        # parser.add_plugin(qparser.FuzzyTermPlugin())
+
         # Allow searching for entire phrases w/ single quotes, like 'microsoft teams'
         parser.add_plugin(qparser.SingleQuotePlugin())
 
