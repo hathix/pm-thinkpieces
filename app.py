@@ -81,15 +81,21 @@ def search():
     # Run search
     hits = thinkpiecer.search(query, ix)
 
-    # TODO: If there are zero results *and* they typed all-uppercase, recommend
+    # If there are zero results *and* they typed all-uppercase, recommend
     # that they go all-lowercase and try again. Many people erroneously type in
     # stuff in caps ("Facebook Strategy") which makes it case-sensitive, returning
     # no results. Instead suggest they do "facebook strategy".
-    # So we should pass a new flag called "recommended_query" in this case.
+    # So we should pass a new flag telling people what to search instead.
+    recommended_query = None
+    has_uppercase_letter = len([letter for letter in query if letter.isupper()]) > 0
+    if len(hits) == 0 and has_uppercase_letter:
+        recommended_query = query.lower()
 
     # Render template
     return render_template('search.html',
-    results=hits, query=query, title_addon=query)
+        results=hits, query=query,
+        title_addon=query,
+        recommended_query=recommended_query)
     # return jsonify(hits)
 
 
