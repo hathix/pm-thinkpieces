@@ -144,6 +144,8 @@ def search(search_term, ix):
         parser.add_plugin(qparser.SingleQuotePlugin())
 
         query = parser.parse(search_term)
+        # May need to tweak the limit here. Higher = slower, but more thorough
+        # (though I think 20 is plenty)
         results = searcher.search(query, limit=20)
 
         # Highlighting settings
