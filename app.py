@@ -78,7 +78,11 @@ def search():
     # If the index is already there, this will be a LOT faster.
     ix = thinkpiecer.load_index()
 
+    # Run search
     hits = thinkpiecer.search(query, ix)
+
+    # TODO: If there are zero results *and* they typed all-uppercase, recommend
+    # that they go all-lowercase and try again. Many people erroneously 
 
     # Render template
     return render_template('search.html',

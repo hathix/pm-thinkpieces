@@ -30,6 +30,11 @@ def get_feeds():
 
         # Emerging Markets
         "emerging",
+        "lillianli",
+        "hind",
+
+        # Enterprise
+        "natjin",
     ]
 
     # Feeds for Substacks are, e.g., https://thegeneralist.substack.com/feed
