@@ -44,7 +44,7 @@ def get_feeds():
         "https://eugene-wei.squarespace.com/blog?format=rss",
         "https://kwokchain.com/feed",
         "https://medium.com/feed/@superwuster",
-        "https://commoncog.com/blog/rss",
+        # "https://commoncog.com/blog/rss",
         "https://www.lennyrachitsky.com/feed",
         "https://medium.com/feed/bloated-mvp",
         "https://medium.com/feed/behavioral-economics-1",
