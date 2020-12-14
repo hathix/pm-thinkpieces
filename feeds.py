@@ -2,7 +2,7 @@
 def get_feeds():
     # First, Substacks. Getting their RSS feeds is pretty simple/systematic.
     substack_domains = [
-        # Generic ones
+        # Generic
         "thegeneralist",
         "danco",
         "diff",
@@ -19,10 +19,13 @@ def get_feeds():
         "productinsights",
         "adventurecapital",
 
-        # HealthTech ones
+        # HealthTech
         "insilico",
         "caseload",
-        "theprescription"
+        "theprescription",
+
+        # EdTech
+        "meganoconnor",
     ]
 
     # Feeds are, e.g., https://thegeneralist.substack.com/feed
@@ -31,7 +34,7 @@ def get_feeds():
     # Now add some custom RSS feeds
     # Medium feeds are medium.com/feed/@user or medium.com/feed/publication
     custom_feeds = [
-        # Generic ones
+        # Generic
         "https://stratechery.com/feed/",
         "http://ben-evans.com/benedictevans?format=rss",
         "https://www.profgalloway.com/feed",
@@ -47,7 +50,7 @@ def get_feeds():
         # "https://fourweekmba.com/feed",
         "http://blog.eladgil.com/feeds/posts/default",
 
-        # HealthTech ones
+        # HealthTech
         "https://outofpocket.health/feed"
     ]
 
