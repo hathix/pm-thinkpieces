@@ -5,6 +5,7 @@ from whoosh.fields import *
 from whoosh.writing import AsyncWriter
 from whoosh.qparser import QueryParser
 import whoosh.qparser as qparser
+from whoosh.qparser.dateparse import DateParserPlugin
 from whoosh import highlight
 import calendar
 from datetime import datetime
@@ -39,7 +40,7 @@ def build_new_index():
         publication=TEXT(stored=True),
         summary=TEXT(stored=True),
         url=ID(stored=True, unique=True),
-        published=DATETIME(stored=True),
+        published=DATETIME(stored=True, sortable=True),
         content=TEXT(stored=True, analyzer=case_sensitive_analyzer))
 
     # Create a home for the index if it doesn't exist already
@@ -177,6 +178,38 @@ def search(search_term, ix):
                 'url': hit.get('url'),
                 'published': hit.get('published'),
                 'highlights': hit.highlights("content", top=3),
+                'score': hit.score
+            }
+
+        hit_list = [extract_hit_info(h) for h in results]
+        return hit_list
+
+
+
+
+# Returns a reverse-chronological list of recent articles from
+# our chosen feeds. Good for making a browsable feed.
+def get_recent_articles(ix):
+    with ix.searcher() as searcher:
+        # Search for the newest items. We have to search for SOMETHING
+        # so we'll start by just searching for recent articles.
+        parser = QueryParser("published", ix.schema)
+        parser.add_plugin(DateParserPlugin())
+        # Let's limit the amount of sorting we have to do by only looking
+        # at pieces in recent history
+        search_term = "'-26 weeks to now'"
+        query = parser.parse(search_term)
+        results = searcher.search(query,
+            limit=50, sortedby="published", reverse=True)
+
+        # Convert each Hit into a dict
+        def extract_hit_info(hit):
+            return {
+                'title': hit.get('title'),
+                'publication': hit.get('publication'),
+                'author': hit.get('author'),
+                'url': hit.get('url'),
+                'published': hit.get('published'),
                 'score': hit.score
             }
 
