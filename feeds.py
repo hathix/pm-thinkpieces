@@ -60,7 +60,7 @@ def get_feeds():
         "http://blog.eladgil.com/feeds/posts/default",
         "https://andrewchen.co/feed",
         # "https://cdixon.org/rss.xml", # Nah his stuff is really old
-        "http://gordonbrander.com/pattern.rss",
+        # "http://gordonbrander.com/pattern.rss", # Errors out
 
         # HealthTech
         "https://outofpocket.health/feed"
