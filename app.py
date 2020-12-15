@@ -122,4 +122,6 @@ def get_recent_articles():
 # Nice way to format a datetime
 @app.template_filter('datetime')
 def format_datetime(value):
-    return value.strftime("%b %d, %Y")
+    # This renders as Jul 4, 1776
+    # see strftime.org for documentation
+    return value.strftime("%b %-d, %Y")
