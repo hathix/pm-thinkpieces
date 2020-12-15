@@ -2,30 +2,13 @@
 
   <h1>Search Results</h1>
 
-  {% from 'macros.html' import searchbox %}
+  {% from 'macros.html' import searchbox, searchresult %}
   {{ searchbox(query) }}
 
   <ul class="list-group">
     {% for hit in results %}
-        <li class="list-group-item">
-          <h4>
-            <a href="{{ hit.url }}" target="_blank">
-              {{ hit.title | safe }}
-            </a>
-          </h4>
-          <p class="lead">
-            {% if hit.author %}
-              {{ hit.author | safe }} in
-            {% endif %}
-            {{ hit.publication | safe }} on {{ hit.published | datetime }}
-          </p>
-
-          <p>
-            <em>{{ hit.highlights | safe }}</em>
-          </p>
-
-          <!-- Score: {{ hit.score }}. -->
-        </li>
+      {{ searchresult(url=hit.url, title=hit.title, author=hit.author,
+          publication=hit.publication, date=hit.published, snippet=hit.highlights)}}
     {% else %}
       <li class="list-group-item list-group-item-danger">
         No results found :(

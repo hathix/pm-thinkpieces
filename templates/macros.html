@@ -17,3 +17,32 @@
     </div>
   </form>
 {%- endmacro %}
+
+
+{# Render a search result card. You don't need to pass any of these fields
+   through a filter, we'll do that for you.
+   Make sure you embed this within a list-group#}
+{% macro searchresult(url, title, author, publication, date, snippet) -%}
+  <li class="list-group-item">
+    <h4>
+      <a href="{{ url }}" target="_blank">
+        {{ title | safe }}
+      </a>
+    </h4>
+    <p class="lead">
+      {% if author %}
+        {{ author | safe }}
+      {% endif %}
+      {% if publication %}
+        in {{ publication | safe }}
+      {% endif %}
+      {% if date %}
+        on {{ date | datetime }}
+      {% endif %}
+    </p>
+
+    <p>
+      <em>{{ snippet | safe }}</em>
+    </p>
+  </li>
+{%- endmacro %}
