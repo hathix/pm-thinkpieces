@@ -33,6 +33,9 @@ def get_feeds():
         "lillianli",
         "hind",
 
+        # Europe
+        "alexandre",
+
         # Enterprise
         "natjin",
 
