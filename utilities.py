@@ -1,4 +1,5 @@
 from whoosh import highlight, analysis
+import re
 
 ##### Utility functions here
 
@@ -42,3 +43,10 @@ class CaseSensitivizer(analysis.Filter):
 # case-insensitive when it's all lower-case
 def get_case_sensitive_analyzer():
     return analysis.RegexTokenizer() | CaseSensitivizer()
+
+# Returns the number of words (not unique, total) in the string.
+def word_count(str):
+    if str is None:
+        return None
+    else:
+        return len(re.findall(r'\w+', str))

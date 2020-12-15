@@ -210,6 +210,7 @@ def get_recent_articles(ix):
                 'author': hit.get('author'),
                 'url': hit.get('url'),
                 'published': hit.get('published'),
+                'content_words': utilities.word_count(hit.get('content')),
                 'score': hit.score
             }
 
