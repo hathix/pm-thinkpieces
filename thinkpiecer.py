@@ -39,6 +39,7 @@ def build_new_index():
         author=TEXT(stored=True),
         publication=TEXT(stored=True),
         summary=TEXT(stored=True),
+        description=TEXT(stored=True),
         url=ID(stored=True, unique=True),
         published=DATETIME(stored=True, sortable=True),
         content=TEXT(stored=True, analyzer=case_sensitive_analyzer),
@@ -116,6 +117,14 @@ def add_articles_to_index(feed_list, ix):
                 summary_tree = BeautifulSoup(safe_get(entry, 'summary'), features="html.parser")
                 body_text = summary_tree.get_text(" ", strip=True)
 
+            # Clean up the description too. This is usually the subheading
+            # but sometimes contains a ton of content.
+            description = None
+            raw_description = entry.get('description')
+            if raw_description is not None:
+                description_tree = BeautifulSoup(raw_description, features="html.parser")
+                description = description_tree.get_text(" ", strip=True)
+
             # Measure how many words are in the body text
             word_count = utilities.word_count(body_text)
 
@@ -124,6 +133,7 @@ def add_articles_to_index(feed_list, ix):
                 author=safe_get(entry, 'author'),
                 publication=publication,
                 summary=safe_get(entry, 'summary'),
+                description=description,
                 url=safe_get(entry, 'link'),
                 published=clean_datetime,
                 content=body_text,
@@ -211,10 +221,25 @@ def get_recent_articles(ix):
 
         # Convert each Hit into a dict
         def extract_hit_info(hit):
-            # We don't have highlights, so let's just show the first few
-            # hundred characters of the piece
+            # We don't have highlights from Whoosh, so let's use the description
+            # (usually the subheader) from the RSS feed.
+            # Some newsletters put their ENTIRE content in the description; in
+            # that case, chop it off
             preview = None
             PREVIEW_LENGTH_CHARS = 300
+
+            # description = hit.get('description')
+            # if description is not None:
+            #     if len(description) > PREVIEW_LENGTH_CHARS:
+            #         # They put their ENTIRE piece in here, probably, so truncate
+            #         preview = description[:PREVIEW_LENGTH_CHARS] + "..."
+            #     else:
+            #         # Like normal, they just used a short subheading. Include
+            #         # all of it
+            #         preview = description
+
+            # EDIT: the descriptions are often kinda lame. Let's use the
+            # beginning of the content instead.
             if hit.get('content') is not None:
                 preview = hit.get('content')[:PREVIEW_LENGTH_CHARS] + "..."
 
