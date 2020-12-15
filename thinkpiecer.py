@@ -200,7 +200,7 @@ def get_recent_articles(ix):
         search_term = "'-26 weeks to now'"
         query = parser.parse(search_term)
         results = searcher.search(query,
-            limit=50, sortedby="published", reverse=True)
+            limit=None, sortedby="published", reverse=True)
 
         # Convert each Hit into a dict
         def extract_hit_info(hit):
