@@ -116,6 +116,7 @@ def get_recent_articles():
         results=results,
         title_addon="Feed")
 
+
 ## Custom Jinja filters
 
 # Nice way to format a datetime

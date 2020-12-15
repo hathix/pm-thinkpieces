@@ -211,12 +211,20 @@ def get_recent_articles(ix):
 
         # Convert each Hit into a dict
         def extract_hit_info(hit):
+            # We don't have highlights, so let's just show the first few
+            # hundred characters of the piece
+            preview = None
+            PREVIEW_LENGTH_CHARS = 300
+            if hit.get('content') is not None:
+                preview = hit.get('content')[:PREVIEW_LENGTH_CHARS] + "..."
+
             return {
                 'title': hit.get('title'),
                 'publication': hit.get('publication'),
                 'author': hit.get('author'),
                 'url': hit.get('url'),
                 'published': hit.get('published'),
+                'preview': preview,
                 # 'content_word_count': hit.get('content_word_count'),
                 'score': hit.score
             }
