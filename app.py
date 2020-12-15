@@ -114,7 +114,7 @@ def get_recent_articles():
 
     return render_template('recents.html',
         results=results,
-        title_addon="Feed")
+        title_addon="Latest")
 
 
 ## Custom Jinja filters
