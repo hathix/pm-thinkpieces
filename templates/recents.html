@@ -1,0 +1,18 @@
+{% include 'header.html' %}
+
+  <h1>Recent Thinkpieces</h1>
+
+  {% from 'macros.html' import searchresult %}
+
+  <ul class="list-group">
+    {% for hit in results %}
+      {{ searchresult(url=hit.url, title=hit.title, author=hit.author,
+          publication=hit.publication, date=hit.published, snippet=hit.highlights)}}
+    {% else %}
+      <li class="list-group-item list-group-item-danger">
+        Nothing published recently :(
+      </li>
+    {% endfor %}
+  </ul>
+
+{% include 'footer.html' %}

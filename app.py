@@ -74,6 +74,11 @@ def search():
     # Get query from GET params
     query = request.args.get('query', '');
 
+    # If no query, they came to the plain /search endpoint. Render the homepage
+    # I guess.
+    if query is None or query == "":
+        return render_template('home.html')
+
     # Load the index (or make a blank one if it's not there)
     # If the index is already there, this will be a LOT faster.
     ix = thinkpiecer.load_index()
@@ -98,6 +103,18 @@ def search():
         recommended_query=recommended_query)
     # return jsonify(hits)
 
+
+@app.route('/recent', methods=['GET'])
+def get_recent_articles():
+    # Load the current index
+    ix = thinkpiecer.load_index()
+
+    # Get a list of recent items
+    results = thinkpiecer.get_recent_articles(ix)
+
+    return render_template('recents.html',
+        results=results,
+        title_addon="Feed")
 
 ## Custom Jinja filters
 
