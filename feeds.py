@@ -13,8 +13,8 @@ def get_feeds():
         "digitalnative",
         "jamesonstartups",
         "napkinmath",
-        "breakingsmart",
-        "artofgig",
+        # "breakingsmart",
+        # "artofgig",
         # "theskip",
         "productinsights",
         "adventurecapital",
@@ -60,6 +60,7 @@ def get_feeds():
         "http://blog.eladgil.com/feeds/posts/default",
         "https://andrewchen.co/feed",
         # "https://cdixon.org/rss.xml", # Nah his stuff is really old
+        "http://gordonbrander.com/pattern.rss",
 
         # HealthTech
         "https://outofpocket.health/feed"
