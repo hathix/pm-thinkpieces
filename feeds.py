@@ -35,6 +35,11 @@ def get_feeds():
 
         # Enterprise
         "natjin",
+
+        # Niche but maybe cool
+        "olivercameron", # for self-driving cars and ML
+        # "afridigest" for africa tech
+        # "dynamo" for mobility startups
     ]
 
     # Feeds for Substacks are, e.g., https://thegeneralist.substack.com/feed
