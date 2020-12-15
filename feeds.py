@@ -17,7 +17,7 @@ def get_feeds():
         # "artofgig",
         # "theskip",
         "productinsights",
-        "adventurecapital",
+        # "adventurecapital",
         "diane", # this is called "Snapshots" and has snapshots of the industry
 
         # HealthTech
@@ -43,6 +43,7 @@ def get_feeds():
         "olivercameron", # for self-driving cars and ML
         # "afridigest" for africa tech
         # "dynamo" for mobility startups
+        # "micromobility" for micromobility (good, but niche)
     ]
 
     # Feeds for Substacks are, e.g., https://thegeneralist.substack.com/feed
