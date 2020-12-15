@@ -41,7 +41,8 @@ def build_new_index():
         summary=TEXT(stored=True),
         url=ID(stored=True, unique=True),
         published=DATETIME(stored=True, sortable=True),
-        content=TEXT(stored=True, analyzer=case_sensitive_analyzer))
+        content=TEXT(stored=True, analyzer=case_sensitive_analyzer),
+        content_word_count=NUMERIC(stored=True))
 
     # Create a home for the index if it doesn't exist already
     if not os.path.exists(WHOOSH_INDEX_DIR):
@@ -96,7 +97,9 @@ def add_articles_to_index(feed_list, ix):
                 publication = safe_get(metadata, 'title')
 
             # Clean up the date into a normal datetime
-            clean_datetime = datetime.fromtimestamp(calendar.timegm(entry['published_parsed']))
+            clean_datetime = None
+            if entry.get('published_parsed') is not None:
+                clean_datetime = datetime.fromtimestamp(calendar.timegm(entry['published_parsed']))
 
             # Most feeds put the main content in `content`,
             # but a rare few like Eugene Wei put it in `summary`
@@ -113,12 +116,9 @@ def add_articles_to_index(feed_list, ix):
                 summary_tree = BeautifulSoup(safe_get(entry, 'summary'), features="html.parser")
                 body_text = summary_tree.get_text(" ", strip=True)
 
-            # This ensures that we don't have duplicate entries with the same unique key (here, URL).
-            # If the key already exists, this wipes it out
-            # and replaces it with a fresh entry.
-            # If the key doesn't exist, it creates
-            # from scratch.
-            # TODO: i don't think it works, check
+            # Measure how many words are in the body text
+            word_count = utilities.word_count(body_text)
+
             writer.update_document(
                 title=safe_get(entry, 'title'),
                 author=safe_get(entry, 'author'),
@@ -126,7 +126,8 @@ def add_articles_to_index(feed_list, ix):
                 summary=safe_get(entry, 'summary'),
                 url=safe_get(entry, 'link'),
                 published=clean_datetime,
-                content=body_text)
+                content=body_text,
+                content_word_count=word_count)
 
     print("DONE!")
     writer.commit()
@@ -185,22 +186,28 @@ def search(search_term, ix):
         return hit_list
 
 
-
-
 # Returns a reverse-chronological list of recent articles from
 # our chosen feeds. Good for making a browsable feed.
 def get_recent_articles(ix):
     with ix.searcher() as searcher:
-        # Search for the newest items. We have to search for SOMETHING
-        # so we'll start by just searching for recent articles.
-        parser = QueryParser("published", ix.schema)
-        parser.add_plugin(DateParserPlugin())
-        # Let's limit the amount of sorting we have to do by only looking
-        # at pieces in recent history
-        search_term = "'-26 weeks to now'"
+        # Search for the newest items.
+        # We have to search for SOMETHING so let's filter out all the
+        # articles that are too short (thus, they're likely paywalled or
+        # programming notes or random Medium replies). Then we can sort by date desc.
+        parser = QueryParser("content_word_count", ix.schema)
+
+        # Add a parser to do numerical comparisons
+        # This is the "greater than, less than" plugin
+        # I've found that the articles that are too short tend to be <250 words
+        # (Medium responses are like 10-20 words, paywalled Substack is like 60,
+        # random programming notes tend to be 100-200). So filter those out.
+        THINKPIECE_MIN_WORD_COUNT = 250
+        parser.add_plugin(qparser.GtLtPlugin())
+        search_term = "content_word_count:>={0}".format(THINKPIECE_MIN_WORD_COUNT)
         query = parser.parse(search_term)
+
         results = searcher.search(query,
-            limit=None, sortedby="published", reverse=True)
+            limit=50, sortedby="published", reverse=True)
 
         # Convert each Hit into a dict
         def extract_hit_info(hit):
@@ -210,7 +217,7 @@ def get_recent_articles(ix):
                 'author': hit.get('author'),
                 'url': hit.get('url'),
                 'published': hit.get('published'),
-                'content_words': utilities.word_count(hit.get('content')),
+                # 'content_word_count': hit.get('content_word_count'),
                 'score': hit.score
             }
 
