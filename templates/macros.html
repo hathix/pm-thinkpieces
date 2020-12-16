@@ -48,3 +48,10 @@
     </p>
   </li>
 {%- endmacro %}
+
+{# A small macro to generate a sample query for the homepage #}
+{% macro sample_search(query) -%}
+  <li>
+    <a href="/search?query={{ query }}">{{ query }}</a>
+  </li>
+{%- endmacro %}

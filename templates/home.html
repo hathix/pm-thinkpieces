@@ -5,10 +5,80 @@
   <p class="lead">
     Research companies, topics, or trends from the ~30 best product management
     writers and analysts.
-    <a href="/search?query=DoorDash">Try it out!</a>
   </p>
 
-  {% from 'macros.html' import searchbox %}
+  {% from 'macros.html' import searchbox, sample_search %}
   {{ searchbox() }}
+
+  <h3 class="mt-5">Or try a sample search:</h3>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <strong>🖥 Big tech</strong>
+      <ul>
+        {{ sample_search("Google") }}
+        {{ sample_search("Alexa") }}
+        {{ sample_search("Instagram") }}
+      </ul>
+
+      <strong>🇺🇸 US startups</strong>
+      <ul>
+        {{ sample_search("TikTok") }}
+        {{ sample_search("Airtable") }}
+        {{ sample_search("DoorDash") }}
+      </ul>
+
+      <strong>🏢 Enterprise</strong>
+      <ul>
+        {{ sample_search("cloud") }}
+        {{ sample_search('"Microsoft Teams"') }}
+        {{ sample_search('"low code"') }}
+      </ul>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <strong>🇮🇳 India</strong>
+      <ul>
+        {{ sample_search("Flipkart") }}
+        {{ sample_search("Jio") }}
+        {{ sample_search("Paytm") }}
+      </ul>
+
+      <strong>🇨🇳 China</strong>
+      <ul>
+        {{ sample_search("Alipay") }}
+        {{ sample_search("Tencent") }}
+        {{ sample_search('"QR codes"') }}
+      </ul>
+
+      <strong>🌏 Southeast Asia</strong>
+      <ul>
+        {{ sample_search("Shopee") }}
+        {{ sample_search("gojek") }}
+        {{ sample_search("Indonesia") }}
+      </ul>
+
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <strong>💰 FinTech</strong>
+      <ul>
+        {{ sample_search("Stripe") }}
+        {{ sample_search('"buy now pay later"') }}
+        {{ sample_search("Bitcoin") }}
+      </ul>
+
+      <strong>💊 HealthTech</strong>
+      <ul>
+        {{ sample_search("Livongo") }}
+        {{ sample_search("genetics") }}
+        {{ sample_search("PBMs") }}
+      </ul>
+
+      <strong>🎓 EdTech</strong>
+      <ul>
+        {{ sample_search("Duolingo") }}
+        {{ sample_search("Outschool") }}
+        {{ sample_search("homeschooling") }}
+      </ul>
+    </div>
+  </div>
 
 {% include 'footer.html' %}
