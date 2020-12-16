@@ -73,7 +73,10 @@ def get_feeds():
         # "http://gordonbrander.com/pattern.rss", # Errors out b/c lacks dates?
 
         # HealthTech
-        "https://outofpocket.health/feed"
+        "https://outofpocket.health/feed",
+
+        # Podcasts
+        "http://investlikethebest.libsyn.com/rss" # Lots of sponsorships but good content
     ]
 
     # Unite all feeds into one
