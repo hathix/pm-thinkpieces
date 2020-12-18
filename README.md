@@ -9,13 +9,26 @@ I'm using `pipenv` to manage virtual environments. Run
 pipenv --python 3.9
 ```
 
-Then
+To create a virtual environment. Then do
+
+```
+pipenv install
+```
+
+To install requirements. Then run
 
 ```
 pipenv shell
 ```
 
-To get going. No need for manual virtualenv stuff anymore.
+to set up a virtual environment. Finally, to start Flask, do
+
+```
+export FLASK_APP=app.py; flask run
+```
+
+Then just open to `127.0.0.1:5000` to start working.
+
 
 ## Versions
 
