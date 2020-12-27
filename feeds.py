@@ -24,6 +24,7 @@ def get_feeds():
         "insilico",
         "caseload",
         "theprescription",
+        "ovsecondopinion",
         "axial", # it's about inventions in life sciences; OK writing but good list of companies
 
         # EdTech
